@@ -1,0 +1,91 @@
+services:
+  mc-create:
+    container_name: ${CONTAINER_NAME}
+    restart: always
+    stdin_open: true
+    tty: true
+    image: itzg/minecraft-server:latest
+    env_file:
+      - .env
+      - secret.env
+    environment:
+      TZ: Asia/Tokyo
+      EULA: "TRUE"
+
+      # --- Server Type ---
+      TYPE: FABRIC
+      VERSION: "1.21.4"
+      FABRIC_LOADER_VERSION: "0.16.10"
+
+      # --- MOD maintenance (Modrinth) ---
+      MODRINTH_PROJECTS: |
+        create-fabric
+        fabric-api
+        jei
+        journeymap
+        range_destroy
+      MODRINTH_DEFAULT_VERSION_TYPE: release
+
+      # --- Server Settings ---
+      DIFFICULTY: normal
+      ONLINE_MODE: "TRUE"
+      MAX_PLAYERS: 20
+      ALLOW_FLIGHT: "TRUE"
+      VIEW_DISTANCE: "10"
+      MEMORY: ${SERVER_MEMORY:-8G}
+
+      # --- RCON ---
+      ENABLE_RCON: "TRUE"
+      RCON_PORT: "25575"
+      RCON_PASSWORD: ${RCON_PASSWORD}
+
+    ports:
+      - "25565:25565/tcp"
+      - "25565:25565/udp"
+    dns:
+      - ${LOCAL_DNS:-8.8.8.8}
+      - 8.8.8.8
+      - 1.1.1.1
+    volumes:
+      - ./minecraft/data:/data
+      - ./minecraft/mods:/data/mods
+      - ./image/server-icon.png:/data/server-icon.png
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "7.5"
+          memory: 23.5G
+
+  backup:
+    image: itzg/mc-backup:latest
+    restart: unless-stopped
+    depends_on:
+      - mc-create
+    env_file:
+      - .env
+      - secret.env
+    environment:
+      TZ: Asia/Tokyo
+      BACKUP_NAME: "${CONTAINER_NAME}-backup"
+      BACKUP_METHOD: tar
+      BACKUP_ON_STARTUP: "TRUE"
+      PRUNE_BACKUPS_DAYS: "5"
+      CRON_SCHEDULE: "0 12 * * *"
+      PAUSE_IF_NO_PLAYERS: "TRUE"
+      PLAYERS_ONLINE_CHECK_INTERVAL: 5m
+      INITIAL_DELAY: 2m
+      RCON_HOST: localhost
+      RCON_PORT: "25575"
+      RCON_PASSWORD: ${RCON_PASSWORD}
+      SERVER_HOST: ${SERVER_HOST_NAME:-localhost}
+      DEST_DIR: /backups
+      LINK_LATEST: "false"
+      TAR_COMPRESS_METHOD: gzip
+    volumes:
+      - ./minecraft/data:/data:ro
+      - ./minecraft/backups:/backups
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    network_mode: "service:mc-create"
