@@ -19,9 +19,9 @@ services:
       # --- MOD maintenance (Modrinth) ---
       MODRINTH_PROJECTS: |
         create
+        create-ultimine
         emi
         journeymap
-        ore-excavation
         load-my-chunks
         architectury-api
         particle-core
@@ -35,6 +35,12 @@ services:
       ALLOW_FLIGHT: "TRUE"
       VIEW_DISTANCE: "10"
       MEMORY: ${SERVER_MEMORY:-8G}
+
+      # --- MOD maintenance (CurseForge) ---
+      CURSEFORGE_FILES: |
+        348174 # = FTB Ultimine
+        404465 # = FTB Library
+        250898 # = Ore Excavation
 
       # --- RCON ---
       ENABLE_RCON: "TRUE"
