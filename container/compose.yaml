@@ -20,6 +20,8 @@ services:
       MODRINTH_PROJECTS: |
         create
         create-ultimine
+        ftb-library
+        ftb-ultimine
         emi
         load-my-chunks
         architectury-api
@@ -37,9 +39,8 @@ services:
 
       # --- MOD maintenance (CurseForge) ---
       CURSEFORGE_FILES: |
-        348174 # = FTB Ultimine
-        404465 # = FTB Library
-        250898 # = Ore Excavation
+        # 348174 # = FTB Ultimine
+        # 404465 # = FTB Library
         32274  # = JourneyMap
 
       # --- RCON ---
