@@ -25,6 +25,7 @@ services:
         architectury-api
         particle-core
         fzzy-config
+        kotlin-for-forge
         immediatelyfast
       MODRINTH_DEFAULT_VERSION_TYPE: release
 
