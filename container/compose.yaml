@@ -23,7 +23,7 @@ services:
         journeymap
         ore-excavation
         load-my-chunks
-        architectury
+        architectury-api
         particle-core
         immediatelyfast
       MODRINTH_DEFAULT_VERSION_TYPE: release
