@@ -16,6 +16,18 @@ services:
       TYPE: NEOFORGE
       VERSION: "1.21.1"
 
+      # --- Server Settings ---
+      DIFFICULTY: hard
+      ONLINE_MODE: "TRUE"
+      MAX_PLAYERS: 50
+      ALLOW_FLIGHT: "TRUE"
+      VIEW_DISTANCE: "30"
+      MEMORY: ${SERVER_MEMORY:-8G}
+
+      # --- RCON ---
+      ENABLE_RCON: "TRUE"
+      RCON_PORT: "25575"
+      
       # --- MOD maintenance (Modrinth) ---
       MODRINTH_PROJECTS: |
         create
@@ -28,22 +40,10 @@ services:
         kotlin-for-forge
         immediatelyfast
       MODRINTH_DEFAULT_VERSION_TYPE: release
-
-      # --- Server Settings ---
-      DIFFICULTY: hard
-      ONLINE_MODE: "TRUE"
-      MAX_PLAYERS: 50
-      ALLOW_FLIGHT: "TRUE"
-      VIEW_DISTANCE: "30"
-      MEMORY: ${SERVER_MEMORY:-8G}
-
+      
       # --- MOD maintenance (CurseForge) ---
       CURSEFORGE_FILES: |
         32274  # = JourneyMap
-
-      # --- RCON ---
-      ENABLE_RCON: "TRUE"
-      RCON_PORT: "25575"
     ports:
       - "25565:25565/tcp"
       - "25565:25565/udp"
