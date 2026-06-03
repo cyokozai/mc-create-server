@@ -24,6 +24,7 @@ services:
         load-my-chunks
         architectury-api
         particle-core
+        fzzy-config
         immediatelyfast
       MODRINTH_DEFAULT_VERSION_TYPE: release
 
