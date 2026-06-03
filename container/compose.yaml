@@ -18,6 +18,7 @@ services:
 
       # --- MOD maintenance (Modrinth) ---
       MODRINTH_PROJECTS: |
+        create
         jei
         journeymap
         ore-excavation
