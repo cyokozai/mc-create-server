@@ -19,7 +19,7 @@ services:
       # --- MOD maintenance (Modrinth) ---
       MODRINTH_PROJECTS: |
         create
-        jei
+        emi
         journeymap
         ore-excavation
         load-my-chunks
