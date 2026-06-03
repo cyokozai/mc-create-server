@@ -58,7 +58,7 @@ services:
       resources:
         limits:
           cpus: "7.5"
-          memory: 23.5G
+          memory: 20G
 
   backup:
     image: itzg/mc-backup:latest
