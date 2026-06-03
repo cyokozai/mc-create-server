@@ -28,11 +28,11 @@ services:
       MODRINTH_DEFAULT_VERSION_TYPE: release
 
       # --- Server Settings ---
-      DIFFICULTY: normal
+      DIFFICULTY: hard
       ONLINE_MODE: "TRUE"
-      MAX_PLAYERS: 20
+      MAX_PLAYERS: 50
       ALLOW_FLIGHT: "TRUE"
-      VIEW_DISTANCE: "10"
+      VIEW_DISTANCE: "30"
       MEMORY: ${SERVER_MEMORY:-8G}
 
       # --- MOD maintenance (CurseForge) ---
