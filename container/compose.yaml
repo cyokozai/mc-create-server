@@ -25,8 +25,7 @@ services:
         architectury-api
         particle-core
         immediatelyfast
-        journeymap
-      MODRINTH_DEFAULT_VERSION_TYPE: release,beta
+      MODRINTH_DEFAULT_VERSION_TYPE: release
 
       # --- Server Settings ---
       DIFFICULTY: normal
@@ -37,8 +36,8 @@ services:
       MEMORY: ${SERVER_MEMORY:-8G}
 
       # --- MOD maintenance (CurseForge) ---
-      # CURSEFORGE_FILES: |
-        # 32274  # = JourneyMap
+      CURSEFORGE_FILES: |
+        32274  # = JourneyMap
 
       # --- RCON ---
       ENABLE_RCON: "TRUE"
