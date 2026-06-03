@@ -37,7 +37,7 @@ services:
       MEMORY: ${SERVER_MEMORY:-8G}
 
       # --- MOD maintenance (CurseForge) ---
-      CURSEFORGE_FILES: |
+      # CURSEFORGE_FILES: |
         # 32274  # = JourneyMap
 
       # --- RCON ---
