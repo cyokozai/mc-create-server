@@ -14,7 +14,7 @@ services:
 
       # --- Server Type ---
       TYPE: FABRIC
-      VERSION: "1.21.4"
+      VERSION: "1.21.1"
       FABRIC_LOADER_VERSION: "0.16.10"
 
       # --- MOD maintenance (Modrinth) ---
@@ -37,14 +37,11 @@ services:
       # --- RCON ---
       ENABLE_RCON: "TRUE"
       RCON_PORT: "25575"
-      RCON_PASSWORD: ${RCON_PASSWORD}
-
     ports:
       - "25565:25565/tcp"
       - "25565:25565/udp"
     dns:
       - ${LOCAL_DNS:-8.8.8.8}
-      - 8.8.8.8
       - 1.1.1.1
     volumes:
       - ./minecraft/data:/data
@@ -78,7 +75,6 @@ services:
       INITIAL_DELAY: 2m
       RCON_HOST: localhost
       RCON_PORT: "25575"
-      RCON_PASSWORD: ${RCON_PASSWORD}
       SERVER_HOST: ${SERVER_HOST_NAME:-localhost}
       DEST_DIR: /backups
       LINK_LATEST: "false"
