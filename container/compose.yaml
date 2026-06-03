@@ -13,18 +13,18 @@ services:
       EULA: "TRUE"
 
       # --- Server Type ---
-      # Fabric を使う理由: Create MOD は Forge/Fabric 専用で Paper (プラグイン) では動作しない
-      # Paper (TYPE: PAPER) は Bukkit プラグイン専用
-      TYPE: FABRIC
-      VERSION: "1.21.1"
-      FABRIC_LOADER_VERSION: "0.16.9"
+      TYPE: NEOFORGE
+      VERSION: "1.21.4"
 
-      # --- MOD 自動管理 (Modrinth から起動時に自動ダウンロード) ---
-      # スラッグまたはプロジェクト ID で指定。改行区切りで複数指定可能。
-      # バージョン固定例: "create-fabric:0.5.1-f-build.1417+mc1.21.1"
+      # --- MOD maintenance (Modrinth) ---
       MODRINTH_PROJECTS: |
-        create-fabric
-        fabric-api
+        jei
+        journeymap
+        ore-excavation
+        load-my-chunks
+        architectury
+        particle-core
+        immediatelyfast
       MODRINTH_DEFAULT_VERSION_TYPE: release
 
       # --- Server Settings ---
@@ -35,7 +35,7 @@ services:
       VIEW_DISTANCE: "10"
       MEMORY: ${SERVER_MEMORY:-8G}
 
-      # --- RCON (バックアップサービスが save/stop 操作するために必要) ---
+      # --- RCON ---
       ENABLE_RCON: "TRUE"
       RCON_PORT: "25575"
       RCON_PASSWORD: ${RCON_PASSWORD}
@@ -49,15 +49,15 @@ services:
       - 1.1.1.1
     volumes:
       - ./minecraft/data:/data
-      - ./minecraft/mods:/data/mods        # 手動追加 MOD 用 (任意)
+      - ./minecraft/mods:/data/mods
       - ./image/server-icon.png:/data/server-icon.png
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
     deploy:
       resources:
         limits:
-          cpus: "7.0"
-          memory: 32G
+          cpus: "7.5"
+          memory: 23.5G
 
   backup:
     image: itzg/mc-backup:latest
@@ -70,10 +70,10 @@ services:
     environment:
       TZ: Asia/Tokyo
       BACKUP_NAME: "${CONTAINER_NAME}-backup"
-      BACKUP_INTERVAL: 12h
       BACKUP_METHOD: tar
       BACKUP_ON_STARTUP: "TRUE"
       PRUNE_BACKUPS_DAYS: "5"
+      CRON_SCHEDULE: "0 12 * * *"
       PAUSE_IF_NO_PLAYERS: "TRUE"
       PLAYERS_ONLINE_CHECK_INTERVAL: 5m
       INITIAL_DELAY: 2m
@@ -81,11 +81,9 @@ services:
       RCON_PORT: "25575"
       RCON_PASSWORD: ${RCON_PASSWORD}
       SERVER_HOST: ${SERVER_HOST_NAME:-localhost}
-      CRON_SCHEDULE: "0 12 * * *"
       DEST_DIR: /backups
       LINK_LATEST: "false"
       TAR_COMPRESS_METHOD: gzip
-      ZSTD_PARAMETERS: "-3 --long=25 --single-thread"
     volumes:
       - ./minecraft/data:/data:ro
       - ./minecraft/backups:/backups
