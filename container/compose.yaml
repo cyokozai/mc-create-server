@@ -21,10 +21,11 @@ services:
       MODRINTH_PROJECTS: |
         create-fabric
         fabric-api
-        jei
+        emi
         journeymap
         range_destroy
-      MODRINTH_DEFAULT_VERSION_TYPE: release
+      # JEI など beta しかリリースしていない MOD があるため beta を許可
+      MODRINTH_DEFAULT_VERSION_TYPE: beta
 
       # --- Server Settings ---
       DIFFICULTY: normal
