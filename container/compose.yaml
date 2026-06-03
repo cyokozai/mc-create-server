@@ -26,7 +26,7 @@ services:
         architectury-api
         particle-core
         immediatelyfast
-      MODRINTH_DEFAULT_VERSION_TYPE: release
+      MODRINTH_DEFAULT_VERSION_TYPE: release,beta
 
       # --- Server Settings ---
       DIFFICULTY: normal
