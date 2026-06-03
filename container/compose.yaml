@@ -13,19 +13,19 @@ services:
       EULA: "TRUE"
 
       # --- Server Type ---
-      TYPE: FABRIC
-      VERSION: "1.21.1"
-      FABRIC_LOADER_VERSION: "0.16.10"
+      TYPE: NEOFORGE
+      VERSION: "1.21.4"
 
       # --- MOD maintenance (Modrinth) ---
       MODRINTH_PROJECTS: |
-        create-fabric
-        fabric-api
-        emi
+        jei
         journeymap
-        range_destroy
-      # JEI など beta しかリリースしていない MOD があるため beta を許可
-      MODRINTH_DEFAULT_VERSION_TYPE: beta
+        ore-excavation
+        load-my-chunks
+        architectury
+        particle-core
+        immediatelyfast
+      MODRINTH_DEFAULT_VERSION_TYPE: release
 
       # --- Server Settings ---
       DIFFICULTY: normal
