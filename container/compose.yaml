@@ -19,14 +19,13 @@ services:
       # --- MOD maintenance (Modrinth) ---
       MODRINTH_PROJECTS: |
         create
-        create-ultimine
-        ftb-library
-        ftb-ultimine
+        sgtveinminer
         emi
         load-my-chunks
         architectury-api
         particle-core
         immediatelyfast
+        journeymap
       MODRINTH_DEFAULT_VERSION_TYPE: release,beta
 
       # --- Server Settings ---
@@ -39,9 +38,7 @@ services:
 
       # --- MOD maintenance (CurseForge) ---
       CURSEFORGE_FILES: |
-        # 348174 # = FTB Ultimine
-        # 404465 # = FTB Library
-        32274  # = JourneyMap
+        # 32274  # = JourneyMap
 
       # --- RCON ---
       ENABLE_RCON: "TRUE"
