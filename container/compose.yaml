@@ -32,19 +32,31 @@ services:
       # --- MOD maintenance (Modrinth) ---
       MODRINTH_PROJECTS: |
         create
-        sgtveinminer
         emi
-        load-my-chunks
         architectury-api
         particle-core
         fzzy-config
         kotlin-for-forge
         immediatelyfast
+        create-power-loader
+        create_factory_logistics
+        extra-gauges
+        ftb-ultimine
+        jade
       MODRINTH_DEFAULT_VERSION_TYPE: release
       
       # --- MOD maintenance (CurseForge) ---
       CURSEFORGE_FILES: |
         32274  # = JourneyMap
+        238222 # = JEI
+        422819 # = Sophisticated Backpacks
+        309927 # = Curios
+        519896 # = Create Stuff & Additions
+        688231 # = Create Steam 'n' Rails
+        968398 # = Create: Copycats+
+        807792 # = VS: Clockwork
+        404465 # = FTB Library (NeoForge)
+        
     ports:
       - "25565:25565/tcp"
     dns:
