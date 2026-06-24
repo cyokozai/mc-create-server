@@ -23,6 +23,7 @@ services:
       ALLOW_FLIGHT: "TRUE"
       VIEW_DISTANCE: "30"
       MEMORY: ${SERVER_MEMORY:-8G}
+      JVM_OPTS: "-Dminecraft.max_pages=5000 -Dforge.readTimeout=300"
 
       # --- RCON ---
       ENABLE_RCON: "TRUE"
@@ -31,22 +32,33 @@ services:
       # --- MOD maintenance (Modrinth) ---
       MODRINTH_PROJECTS: |
         create
-        sgtveinminer
         emi
-        load-my-chunks
         architectury-api
         particle-core
         fzzy-config
         kotlin-for-forge
         immediatelyfast
+        create-power-loader
+        create_factory_logistics
+        extra-gauges
+        ftb-ultimine
+        jade
       MODRINTH_DEFAULT_VERSION_TYPE: release
       
       # --- MOD maintenance (CurseForge) ---
       CURSEFORGE_FILES: |
         32274  # = JourneyMap
+        238222 # = JEI
+        422819 # = Sophisticated Backpacks
+        309927 # = Curios
+        519896 # = Create Stuff & Additions
+        688231 # = Create Steam 'n' Rails
+        968398 # = Create: Copycats+
+        807792 # = VS: Clockwork
+        404465 # = FTB Library (NeoForge)
+        
     ports:
       - "25565:25565/tcp"
-      - "25565:25565/udp"
     dns:
       - ${LOCAL_DNS:-8.8.8.8}
       - 1.1.1.1
@@ -59,8 +71,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "7.5"
-          memory: 20G
+          cpus: "3.5"
+          memory: 30G
 
   backup:
     image: itzg/mc-backup:latest
@@ -92,3 +104,9 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
     network_mode: "service:mc-create"
+
+networks:
+  default:
+    driver: bridge
+    driver_opts:
+      com.docker.network.driver.mtu: 1280
