@@ -33,3 +33,5 @@ minecraft/mods/
 # example ファイルは追跡対象
 !*.env.example
 !*secret.env.example
+
+.mc-backup-lock
