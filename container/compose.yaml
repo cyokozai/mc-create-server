@@ -29,33 +29,36 @@ services:
       ENABLE_RCON: "TRUE"
       RCON_PORT: "25575"
       
-      # --- MOD maintenance (Modrinth) ---
+# --- MOD maintenance (Modrinth) ---
       MODRINTH_PROJECTS: |
-        create
-        emi
         architectury-api
-        particle-core
-        fzzy-config
-        kotlin-for-forge
-        immediatelyfast
+        copycats
+        create
+        create-aeronautics
         create-power-loader
-        create_factory_logistics
+        create-steam-n-rails-1.21.1
+        create-stuff-additions
+        # create_factory_logistics:beta #Deployerとの競合のため、無効化
+        deployer
+        emi
         extra-gauges
-        ftb-ultimine
+        fzzy-config
+        immediatelyfast
         jade
+        kotlin-for-forge
+        particle-core
+        sable
+        sophisticated-backpacks
+        sophisticated-core
       MODRINTH_DEFAULT_VERSION_TYPE: release
       
       # --- MOD maintenance (CurseForge) ---
       CURSEFORGE_FILES: |
-        32274  # = JourneyMap
-        238222 # = JEI
-        422819 # = Sophisticated Backpacks
-        309927 # = Curios
-        519896 # = Create Stuff & Additions
-        688231 # = Create Steam 'n' Rails
-        968398 # = Create: Copycats+
-        807792 # = VS: Clockwork
+        309927 # = Curios API
         404465 # = FTB Library (NeoForge)
+        386134 # = FTB Ultimine (NeoForge)
+        32274  # = JourneyMap
+        238222 # = Just Enough Items (JEI)
         
     ports:
       - "25565:25565/tcp"

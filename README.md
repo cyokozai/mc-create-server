@@ -33,40 +33,41 @@ MODRINTH_PROJECTS: |
 
 手動で MOD を追加したい場合は `container/minecraft/mods/` に `.jar` を配置してください。
 
-### Modrinth 管理Mod一覧
-
-`MODRINTH_PROJECTS` に指定するスラグと、現在のNeoForge 1.21.1 環境における対応状況のまとめである。
+### README用: Modrinth 管理Mod一覧
 
 | Mod名 | URL | Project Slug | 対応バージョン |
 | --- | --- | --- | --- |
-| Create | - | `create` | 1.21.1 (NeoForge) |
-| EMI | - | `emi` | 1.21.1 (NeoForge) |
 | Architectury API | - | `architectury-api` | 1.21.1 (NeoForge) |
-| Particle Core | - | `particle-core` | 1.21.1 (NeoForge) |
-| Fzzy Config | - | `fzzy-config` | 1.21.1 (NeoForge) |
-| Kotlin for Forge | - | `kotlin-for-forge` | 1.21.1 (NeoForge) |
-| ImmediatelyFast | - | `immediatelyfast` | 1.21.1 (NeoForge) |
+| Create: Copycats+ | [https://modrinth.com/mod/copycats/versions](https://modrinth.com/mod/copycats/versions) | `copycats` | 1.21.1 (NeoForge) |
+| Create | - | `create` | 1.21.1 (NeoForge) |
+| Create Aeronautics | [https://www.curseforge.com/minecraft/mc-mods/create-aeronautics](https://www.curseforge.com/minecraft/mc-mods/create-aeronautics) | `create-aeronautics` | 1.21.1 (NeoForge) |
 | Create Power Loader | [https://modrinth.com/mod/create-power-loader](https://modrinth.com/mod/create-power-loader) | `create-power-loader` | 1.21.1 (NeoForge) |
-| Create Factory Logistics | [https://modrinth.com/mod/create_factory_logistics](https://modrinth.com/mod/create_factory_logistics) | `create_factory_logistics` | 1.21.1 (NeoForge) |
+| Create Steam 'n' Rails | [https://modrinth.com/mod/create-steam-n-rails-1.21.1](https://modrinth.com/mod/create-steam-n-rails-1.21.1) | `create-steam-n-rails-1.21.1` | 1.21.1 (NeoForge) |
+| Create Stuff & Additions | [https://modrinth.com/mod/create-stuff-additions](https://modrinth.com/mod/create-stuff-additions) | `create-stuff-additions` | 1.21.1 (NeoForge) |
+| Create Factory Logistics | [https://modrinth.com/mod/create_factory_logistics](https://modrinth.com/mod/create_factory_logistics) | `create_factory_logistics:beta` | 1.21.1 (NeoForge) |
+| Deployer API | [https://modrinth.com/mod/deployer](https://modrinth.com/mod/deployer) | `deployer` | 1.21.1 (NeoForge) |
+| EMI | - | `emi` | 1.21.1 (NeoForge) |
 | Extra Gauges | [https://modrinth.com/mod/extra-gauges](https://modrinth.com/mod/extra-gauges) | `extra-gauges` | 1.21.1 (NeoForge) |
-| FTB Ultimine | [https://github.com/FTBTeam/FTB-Ultimine](https://github.com/FTBTeam/FTB-Ultimine) | `ftb-ultimine` | 1.21.1 (NeoForge) |
-| Jade | [https://modrinth.com/mod/jade/versions?c=release&g=1.21.1&l=neoforge](https://modrinth.com/mod/jade/versions?c=release&g=1.21.1&l=neoforge) | `jade` | 1.21.1 (NeoForge) |
+| Fzzy Config | - | `fzzy-config` | 1.21.1 (NeoForge) |
+| ImmediatelyFast | - | `immediatelyfast` | 1.21.1 (NeoForge) |
+| Jade | [https://modrinth.com/mod/jade](https://modrinth.com/mod/jade) | `jade` | 1.21.1 (NeoForge) |
+| Kotlin for Forge | - | `kotlin-for-forge` | 1.21.1 (NeoForge) |
+| Particle Core | - | `particle-core` | 1.21.1 (NeoForge) |
+| Sable | [https://modrinth.com/mod/sable](https://modrinth.com/mod/sable) | `sable` | 1.21.1 (NeoForge) |
+| Sophisticated Backpacks | [https://modrinth.com/mod/sophisticated-backpacks](https://modrinth.com/mod/sophisticated-backpacks) | `sophisticated-backpacks` | 1.21.1 (NeoForge) |
+| Sophisticated Core | [https://modrinth.com/mod/sophisticated-core](https://modrinth.com/mod/sophisticated-core) | `sophisticated-core` | 1.21.1 (NeoForge) |
 
-### CurseForge 管理Mod一覧
+### README用: CurseForge 管理Mod一覧
 
-`CURSEFORGE_FILES` に指定するProject IDと、現在のNeoForge 1.21.1 環境における対応状況のまとめである。
+(※CurseForge側のリストに変更はないが、最新の状態として再掲する)
 
 | Mod名 | URL | Project ID | 対応バージョン |
 | --- | --- | --- | --- |
+| Curios API | [https://www.curseforge.com/minecraft/mc-mods/curios](https://www.curseforge.com/minecraft/mc-mods/curios) | `309927` | 1.21.1 (NeoForge) |
+| FTB Library (NeoForge) | [https://www.curseforge.com/minecraft/mc-mods/ftb-library-forge](https://www.curseforge.com/minecraft/mc-mods/ftb-library-forge) | `404465` | 1.21.1 (NeoForge) |
+| FTB Ultimine (NeoForge) | [https://github.com/FTBTeam/FTB-Ultimine](https://github.com/FTBTeam/FTB-Ultimine) | `386134` | 1.21.1 (NeoForge) |
 | JourneyMap | - | `32274` | 1.21.1 (NeoForge) |
 | Just Enough Items (JEI) | [https://www.curseforge.com/minecraft/mc-mods/jei](https://www.curseforge.com/minecraft/mc-mods/jei) | `238222` | 1.21.1 (NeoForge) |
-| Sophisticated Backpacks | [https://www.curseforge.com/minecraft/mc-mods/sophisticated-backpacks](https://www.curseforge.com/minecraft/mc-mods/sophisticated-backpacks) | `422819` | 1.21.1 (NeoForge) |
-| Curios API | [https://www.curseforge.com/minecraft/mc-mods/curios](https://www.curseforge.com/minecraft/mc-mods/curios) | `309927` | 1.21.1 (NeoForge) |
-| Create Stuff & Additions | [https://www.curseforge.com/minecraft/mc-mods/create-stuff-additions](https://www.curseforge.com/minecraft/mc-mods/create-stuff-additions) | `519896` | 1.21.1 (NeoForge) |
-| Create Steam 'n' Rails | [https://www.curseforge.com/minecraft/mc-mods/create-steam-n-rails](https://www.curseforge.com/minecraft/mc-mods/create-steam-n-rails) | `688231` | 1.21.1 (NeoForge) |
-| Create: Copycats+ | [https://www.curseforge.com/minecraft/mc-mods/copycats](https://www.curseforge.com/minecraft/mc-mods/copycats) | `968398` | 1.21.1 (NeoForge) |
-| VS: Clockwork | [https://www.curseforge.com/minecraft/mc-mods/create-clockwork](https://www.curseforge.com/minecraft/mc-mods/create-clockwork) | `807792` | 1.21.1 (NeoForge) |
-| FTB Library (NeoForge) | [https://www.curseforge.com/minecraft/mc-mods/ftb-library-forge](https://www.curseforge.com/minecraft/mc-mods/ftb-library-forge) | `404465` | 1.21.1 (NeoForge) |
 
 ## バックアップ
 
