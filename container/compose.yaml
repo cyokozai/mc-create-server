@@ -15,6 +15,7 @@ services:
       # --- Server Type ---
       TYPE: NEOFORGE
       VERSION: "1.21.1"
+      NEOFORGE_VERSION: "21.1.248"
 
       # --- Server Settings ---
       DIFFICULTY: hard
@@ -35,6 +36,7 @@ services:
         copycats
         create
         create-aeronautics
+        create-electro-energetics
         create-power-loader
         create-steam-n-rails-1.21.1
         create-stuff-additions
@@ -50,6 +52,7 @@ services:
         sable
         sophisticated-backpacks
         sophisticated-core
+        worldedit
       MODRINTH_DEFAULT_VERSION_TYPE: release
       
       # --- MOD maintenance (CurseForge) ---
