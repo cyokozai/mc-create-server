@@ -10,7 +10,7 @@ Create とその addon 群を中心とした **Minecraft 1.21.1 / NeoForge** サ
 | 項目 | 値 |
 | --- | --- |
 | Minecraft | 1.21.1 |
-| Mod Loader | NeoForge（**21.1.233 以上**を推奨） |
+| Mod Loader | NeoForge **21.1.238 以上**（推奨 `21.1.248`。[理由](#neoforge-のバージョン要件)） |
 | 難易度 | hard |
 | 最大プレイヤー数 | 50 |
 | 公開ポート | `25565/tcp` |
@@ -178,8 +178,9 @@ unzip -p <mod>.jar META-INF/jarjar/metadata.json
 1. [Prism Launcher](https://prismlauncher.org/) をインストールしてログインする
 2. **「インスタンスを追加」→「カスタム」** を選ぶ
 3. **Minecraft `1.21.1`** を選択
-4. Mod Loader に **NeoForge** を選び、**`21.1.233` 以上**を指定する
-   - 最低要件は Sable の `21.1.228`、Create の `21.1.219`。迷ったらサーバーのログに出ているバージョンに合わせる
+4. Mod Loader に **NeoForge** を選び、**`21.1.248`** を指定する
+   - **`21.1.238` 未満では JEI が読み込めず、`Error loading mods` で起動に失敗する** → [NeoForge のバージョン要件](#neoforge-のバージョン要件)
+   - サーバーが使っているバージョンと一致させるのが確実。確認方法は同節に記載
 5. インスタンス名を付けて作成
 
 ### 2. MOD を追加
@@ -198,6 +199,16 @@ unzip -p <mod>.jar META-INF/jarjar/metadata.json
 Create + Sable は描画負荷が高い。**「編集」→「設定」→「Java」** でメモリを **6〜8 GB** に上げる。
 既定の 2 GB 前後だとワールド読み込み中に落ちる。
 
+### LWJGL は変更しない
+
+Prism では LWJGL のバージョンも変更できるが、**`3.3.3` のまま触らないこと。**
+`3.3.3` は Minecraft 1.21.1 が公式に指定している値で、**MOD 側は LWJGL を一切要求していない**（全 MOD の
+`neoforge.mods.toml` を確認済み）。上げても解決する問題は無く、動作確認されていない組み合わせになるだけ。
+
+変更を検討するのは `Failed to initialize GLFW` などネイティブ層のクラッシュを踏んだ場合の回避策としてのみ。
+NeoForge のバージョンとは性質が違うので混同しないこと（NeoForge は各 MOD が明示的に要求する＝不足すると
+MOD が読み込まれない。LWJGL は Minecraft 本体が固定する）。
+
 ### 4. サーバーに接続
 
 **マルチプレイ →「サーバーを追加」** でサーバーアドレスを登録する（ポートは既定の `25565`）。
@@ -206,10 +217,64 @@ Create + Sable は描画負荷が高い。**「編集」→「設定」→「Jav
 
 | 症状 | 原因 | 対処 |
 | --- | --- | --- |
+| `Error loading mods` / `Mod xxx requires neoforge NNN or above` | **NeoForge が古い** | NeoForge を `21.1.248` に上げる → [バージョン要件](#neoforge-のバージョン要件) |
 | `Incompatible mod set!` / MOD 名の一覧が出る | クライアントに `Client` ✅ の MOD が欠けている | 表示された MOD を Prism で追加する |
 | `Connection closed` / registry 不一致 | クライアントとサーバーの MOD バージョン差 | サーバーが解決したバージョンに合わせる |
 | クライアントが起動しない（`Missing or unsupported mandatory dependencies`） | 1.20.1 版など別バージョンの MOD が混入 | Prism の Mods タブでバージョンを確認して入れ直す |
 | ワールド読み込み中に落ちる | メモリ不足 | Java 設定でメモリを増やす |
+
+---
+
+## NeoForge のバージョン要件
+
+**最低 `21.1.238` / 推奨 `21.1.248`（1.21.1 系の最新）。**
+サーバーとクライアントで同じバージョンを使うこと。
+
+必要バージョンは「全 MOD が要求する下限の**最大値**」で決まる。現構成では **JEI が `21.1.238`** を要求し、
+これが全体の下限になっている。1 つでも要求を下回ると `Error loading mods` で起動に失敗する。
+
+```text
+Mod jei requires neoforge 21.1.238 or above
+Currently, neoforge is 21.1.233
+```
+
+| MOD | 要求する NeoForge |
+| --- | --- |
+| **JEI** | **`[21.1.238,)`** ← 全体の下限を決めている |
+| Steam 'n' Rails | `[21.1.233,)` |
+| Create Aeronautics / Sable | `[21.1.228,)` |
+| Create: Deployer API / Extra Gauges | `[21.1.227,)` |
+| Create | `[21.1.219,)` |
+| Create: Copycats+ | `[21.1.200,)` |
+| Create: Electro Energetics | `[21.1.174,)` |
+| Create Stuff 'N Additions | `[21.1.65,)` |
+| Curios API | `[21.1.60,)` |
+| その他（Jade / WorldEdit / EMI ほか） | `21.1.0` 未満 — 制約にならない |
+
+> FTB Library / FTB Ultimine は Modrinth に無く未検証。JEI より厳しい要求があれば上記の下限は変わる。
+
+### バージョンを確認する
+
+```bash
+# サーバーが実際に使っている NeoForge
+docker compose -f container/compose.yaml logs mc-create | grep -oE 'neoforge-[0-9.]+' | head -1
+
+# 1.21.1 向けに公開されている NeoForge の一覧（最新を知りたいとき）
+curl -s 'https://maven.neoforged.net/api/maven/versions/releases/net/neoforged/neoforge' \
+  | python3 -c "import json,sys; v=[x for x in json.load(sys.stdin)['versions'] if x.startswith('21.1.')]; print(v[-5:])"
+```
+
+クライアント側は Prism の **「編集」→「バージョン」** で NeoForge を選び、`Change version` で変更できる。
+MOD を入れ直す必要はない。
+
+### MOD 追加時にやること
+
+**MOD を追加したら、その MOD の NeoForge 要求も必ず確認する。** 下限が上がっていたら
+README のこの節とクライアント側インスタンスの両方を更新する。
+
+```bash
+unzip -p <mod>.jar META-INF/neoforge.mods.toml | grep -A3 'modId *= *"neoforge"'
+```
 
 ---
 

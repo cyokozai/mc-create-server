@@ -33,7 +33,7 @@ docker compose -f container/compose.yaml logs -f mc-create
 
 ## リポジトリ構成
 
-```
+```text
 README.md                      # 唯一のドキュメント。MOD 一覧表を含む
 container/
   compose.yaml                 # ★ サーバー構成の単一の情報源（MOD リストもここ）
@@ -114,8 +114,24 @@ Create 本体を上げるときは必ず addon 側のレンジを再確認する
 | MOD | 制約 | 現状 |
 | --- | --- | --- |
 | Create: Electro Energetics `1.21.1-1.1.1` | `create` **`[6.0.7,6.1.0)`** | Create `6.0.10+mc1.21.1` で範囲内。**Create 6.1.0 が出ると破綻** |
-| Sable `2.0.3` | NeoForge `[21.1.228,)` | クライアント側 NeoForge は `21.1.233` で充足 |
-| Create: Electro Energetics | NeoForge `[21.1.174,)` | 同上 |
+| **JEI `19.44.0.401`** | NeoForge **`[21.1.238,)`** | **全 MOD 中で最も厳しい。ここが NeoForge の下限を決めている** |
+| Steam 'n' Rails | NeoForge `[21.1.233,)` | 2 番目に厳しい |
+| Sable `2.0.3` / Create Aeronautics | NeoForge `[21.1.228,)` | |
+
+**NeoForge は最低 `21.1.238` / 推奨 `21.1.248`。サーバーとクライアントで一致させる。**
+
+⚠ **NeoForge の推奨バージョンを答えるときは、一部の MOD だけ見て決めてはいけない。**
+必ず全 MOD の要求を集計して**最大値**を取る。過去にこれを怠り `21.1.233` と誤って案内し、
+JEI（`21.1.238` 要求）が読み込めずクライアントが起動しない事故を起こしている。
+
+```bash
+# 全 MOD の NeoForge 要求を一括で洗い出す（jar を集めたディレクトリで実行）
+for j in *.jar; do
+  printf '%-34s ' "$j"
+  unzip -p "$j" META-INF/neoforge.mods.toml 2>/dev/null \
+    | grep -A3 'modId *= *"neoforge"' | grep versionRange || echo '-'
+done | sort -t'[' -k2 -rV
+```
 
 `create_factory_logistics` は **Deployer と競合するため無効化中**（`compose.yaml` にコメントで残す）。
 有効化を提案する前にこの経緯を確認すること。

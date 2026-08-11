@@ -15,6 +15,7 @@ services:
       # --- Server Type ---
       TYPE: NEOFORGE
       VERSION: "1.21.1"
+      NEOFORGE_VERSION: "21.1.248"
 
       # --- Server Settings ---
       DIFFICULTY: hard
