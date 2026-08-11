@@ -35,6 +35,7 @@ services:
         copycats
         create
         create-aeronautics
+        create-electro-energetics
         create-power-loader
         create-steam-n-rails-1.21.1
         create-stuff-additions
@@ -50,6 +51,7 @@ services:
         sable
         sophisticated-backpacks
         sophisticated-core
+        worldedit
       MODRINTH_DEFAULT_VERSION_TYPE: release
       
       # --- MOD maintenance (CurseForge) ---
