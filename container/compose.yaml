@@ -32,39 +32,57 @@ services:
       
 # --- MOD maintenance (Modrinth) ---
       MODRINTH_PROJECTS: |
-        architectury-api
-        copycats
-        create
-        create-aeronautics
-        create-electro-energetics
-        create-power-loader
-        create-steam-n-rails-1.21.1
-        create-stuff-additions
-        # create_factory_logistics:beta #Deployerとの競合のため、無効化
-        deployer
-        emi
-        extra-gauges
-        fzzy-config
-        immediatelyfast
-        jade
-        kotlin-for-forge
-        particle-core
-        sable
-        sophisticated-backpacks
-        sophisticated-core
-        worldedit
+        # --- core / library ---
+        architectury-api:13.0.11+neoforge
+        dragonlib:1.21.1-beta-3.0.28
+        fzzy-config:0.7.7+1.21+neoforge
+        kotlin-for-forge:5.12.0
+        # --- Create + addon ---
+        create:6.0.10+mc1.21.1
+        copycats:3.0.9+mc.1.21.1-neoforge
+        create-aeronautics:1.3.2+mc1.21.1
+        create-coasters-simulated:0.1.5
+        create-electro-energetics:1.21.1-1.1.2
+        create-power-loader:2.0.5-mc1.21.1
+        create-railways-navigator:1.21.1-beta-0.10.0-C6
+        create-steam-n-rails-1.21.1:0.2.1+neoforge-mc1.21.1
+        create-stuff-additions:2.1.4.b
+        createtrainwebapi:1.1.0
+        deployer:0.1.3
+        extra-gauges:2.1.3
+        # create_factory_logistics #Deployerとの競合のため、無効化
+        # --- gameplay / decoration ---
+        corail-tombstone:neoforge-1.21.1-9.5.6
+        immersive-paintings:0.7.9+1.21.1
+        sable:2.0.5+mc1.21.1
+        sophisticated-backpacks:1.21.1-3.26.6.2174
+        sophisticated-core:1.21.1-1.5.2.2343
+        # --- utility / server ---
+        bluemap:5.7-neoforge
+        emi:1.1.24+1.21.1+neoforge
+        jade:15.10.6+neoforge
+        worldedit:7.3.8
+        # --- client side (server にも置いているが実質クライアント機能) ---
+        immediatelyfast:1.6.14+1.21.1-neoforge
+        particle-core:0.3.3+1.21+neoforge
+      # 全 slug を <slug>:<version> で固定している。MODRINTH_DEFAULT_VERSION_TYPE は
+      # 固定漏れが起きたときの保険としてのみ効く。更新は tools/lock-mods.py で行う
       MODRINTH_DEFAULT_VERSION_TYPE: release
       
       # --- MOD maintenance (CurseForge) ---
       CURSEFORGE_FILES: |
-        309927 # = Curios API
-        404465 # = FTB Library (NeoForge)
-        386134 # = FTB Ultimine (NeoForge)
-        32274  # = JourneyMap
-        238222 # = Just Enough Items (JEI)
-        
+        309927:6529130   # = Curios API 9.5.1
+        404465:9008089   # = FTB Library (NeoForge) 2101.1.37
+        386134:8231400   # = FTB Ultimine (NeoForge) 2101.1.15
+        32274:8923668    # = JourneyMap 6.0.9
+        238222:8792638   # = Just Enough Items (JEI) 19.51.0.418
+        1666057:8943256  # = Create: Station Voices 1.0.2
     ports:
       - "25565:25565/tcp"
+      # BlueMap / CreateTrainWebAPI は localhost のみに束縛する。
+      # 外部公開する場合はリバースプロキシを前段に置くこと（直接 0.0.0.0 に晒さない）
+      - "127.0.0.1:8100:8100/tcp"   # BlueMap web
+      - "127.0.0.1:8080:8080/tcp"   # CreateTrainWebAPI
     dns:
       - ${LOCAL_DNS:-8.8.8.8}
       - 1.1.1.1
