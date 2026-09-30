@@ -56,16 +56,32 @@ container/
 | `MODRINTH_PROJECTS` | Modrinth の project slug を改行区切り | `#` 以降はコメント。`slug:beta` でチャネル指定 |
 | `CURSEFORGE_FILES` | CurseForge の **project ID** を改行区切り | `309927 # = Curios API` の形でコメント必須 |
 
-`MODRINTH_DEFAULT_VERSION_TYPE: release` のため、**バージョン未指定の slug は最新 release に自動追従する**。
-これは便利だが、addon の依存レンジを外れて壊れる原因になる（下記「監視すべきバージョン制約」）。
+**MOD は全てバージョン固定する方針に変更済み**（`feat/mod-pinning`）。
+`MODRINTH_PROJECTS` は `<slug>:<version number>`、`CURSEFORGE_FILES` は `<project id>:<file id>`。
+`MODRINTH_DEFAULT_VERSION_TYPE: release` は**固定漏れの保険**としてのみ残している。
+バージョン未指定で slug を足すと自動追従に戻ってしまうので書かないこと。
+
+検証と生成は `tools/lock-mods.py` に集約している（compose.yaml を読むだけで書き換えない）。
+
+```bash
+python3 tools/lock-mods.py check    # 固定漏れ・解決失敗の検査
+python3 tools/lock-mods.py latest   # 上流の最新と固定値の差分
+python3 tools/lock-mods.py mrpack   # client/mc-create.mrpack を再生成
+```
 
 ### MOD を追加・変更したときにやること
 
-1. `compose.yaml` の該当リストに追記
-2. **`README.md` の MOD 一覧表を同じ内容に更新**（表と compose の乖離が過去に何度も起きている）
+1. `compose.yaml` の該当リストに **`<slug>:<version>` の形で**追記
+2. `python3 tools/lock-mods.py check` を通す
 3. 依存関係を下記の手順で検証
-4. クライアント側（Prism）にも必要な MOD かを判定し、クライアント一覧にも反映
-5. 起動確認は VM 上でユーザーに依頼
+4. **`README.md` の MOD 一覧表を同じ内容に更新**（表と compose の乖離が過去に何度も起きている）
+5. クライアント側（Prism）にも必要な MOD かを判定し、`Client` 列に反映
+6. `python3 tools/lock-mods.py mrpack` で `client/mc-create.mrpack` を作り直す
+7. 起動確認は VM 上でユーザーに依頼
+
+クライアント配布は **`client/mc-create.mrpack` を Prism にインポートさせる**のが正。
+MOD 名を口頭で伝えて手で入れさせない（バージョン取り違えの温床）。
+CurseForge 管理の 6 件だけは mrpack に入らないので手動追加が必要。
 
 ## 依存関係の検証手順（推測せず必ずこれで確認する）
 
