@@ -80,8 +80,8 @@ services:
         1666057:8943256  # = Create: Station Voices 1.0.2
     ports:
       - "25565:25565/tcp"
-      - "127.0.0.1:8100:8100/tcp"   # BlueMap web | BlueMap / CreateTrainWebAPI は localhost のみに束縛
-      - "127.0.0.1:8080:8080/tcp"   # CreateTrainWebAPI
+      - "${WEB_BIND_IP:-127.0.0.1}:8100:8100/tcp"
+      - "${WEB_BIND_IP:-127.0.0.1}:8080:8080/tcp"
     dns:
       - ${LOCAL_DNS:-8.8.8.8}
       - 1.1.1.1
